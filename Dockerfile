@@ -3,6 +3,11 @@ MAINTAINER Damien Raude-Morvan "drazzib@drazzib.com"
 
 RUN apt-get update && apt-get install -y curl sudo tar && apt-get clean
 
+# Don't clean /tmp !
+RUN update-rc.d mountall-bootclean.sh disable \
+ && update-rc.d mountnfs-bootclean.sh disable \
+ && update-rc.d checkroot-bootclean.sh disable
+
 # Install the Chef client
 RUN curl -L https://www.opscode.com/chef/install.sh | bash -s -- -v 12.5.1
 
@@ -10,8 +15,16 @@ RUN curl -L https://www.opscode.com/chef/install.sh | bash -s -- -v 12.5.1
 RUN GEM_HOME="/tmp/verifier/gems" \
     GEM_PATH="/tmp/verifier/gems" \
     GEM_CACHE="/tmp/verifier/gems/cache" \
-    /opt/chef/embedded/bin/gem install --no-ri --no-rdoc --bindir /tmp/verifier/bin \
-    thor busser busser-serverspec serverspec serverspec_extensions bundler yarjuf
+    /opt/chef/embedded/bin/gem install --no-rdoc --no-ri \
+    --no-format-executable -n /tmp/verifier/bin --no-user-install \
+    busser
+
+RUN GEM_HOME="/tmp/verifier/gems" \
+    GEM_PATH="/tmp/verifier/gems" \
+    GEM_CACHE="/tmp/verifier/gems/cache" \
+    /opt/chef/embedded/bin/gem install --no-rdoc --no-ri \
+    thor busser-serverspec serverspec serverspec_extensions bundler yarjuf
+
 RUN useradd kitchen && chown -R kitchen:kitchen /tmp/verifier
 
 # https://docs.chef.io/chef_client_security.html#ssl-cert-file
