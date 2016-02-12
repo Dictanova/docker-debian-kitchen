@@ -1,7 +1,7 @@
-FROM debian:wheezy
+FROM debian:jessie
 MAINTAINER Damien Raude-Morvan "drazzib@drazzib.com"
 
-RUN apt-get update && apt-get install -y curl sudo tar && apt-get clean
+RUN apt-get update && apt-get install -y curl sudo tar sysvinit-core && apt-get clean
 
 RUN curl -L https://www.opscode.com/chef/install.sh | bash -s -- -v 12.5.1
 
