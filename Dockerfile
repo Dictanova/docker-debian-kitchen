@@ -1,14 +1,10 @@
 FROM debian:jessie
 MAINTAINER Damien Raude-Morvan "drazzib@drazzib.com"
 
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
- && apt-get install -y curl sudo tar sysvinit-core lsb-release \
+ && apt-get install -y curl sudo tar lsb-release \
  && apt-get clean
-
-# Don't clean /tmp !
-RUN update-rc.d mountall-bootclean.sh disable \
- && update-rc.d mountnfs-bootclean.sh disable \
- && update-rc.d checkroot-bootclean.sh disable
 
 # Install the Chef client
 RUN curl -L https://www.opscode.com/chef/install.sh | bash -s -- -v 12.5.1
@@ -34,4 +30,16 @@ RUN useradd kitchen && chown -R kitchen:kitchen /tmp/verifier
 ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs
 
-CMD  ["/sbin/init"]
+ENV container docker
+RUN systemctl mask \
+    systemd-remount-fs.service \
+    dev-hugepages.mount \
+    sys-fs-fuse-connections.mount \
+    systemd-logind.service \
+    getty.target \
+    console-getty.service \
+    systemd-tmpfiles-clean.service \
+    systemd-tmpfiles-clean.timer
+
+VOLUME ["/sys/fs/cgroup"]
+CMD  ["/sbin/systemd"]
