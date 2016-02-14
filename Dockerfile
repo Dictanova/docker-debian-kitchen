@@ -38,8 +38,10 @@ RUN systemctl mask \
     systemd-logind.service \
     getty.target \
     console-getty.service \
-    systemd-tmpfiles-clean.service \
-    systemd-tmpfiles-clean.timer
+    tmp.mount # tmp is not on tmpfs and hence persistent through reboots
+
+# to override shipped tmpfilesd configuration and disable cleaning of /tmp
+RUN echo "" > /etc/tmpfiles.d/tmp.conf
 
 VOLUME ["/sys/fs/cgroup"]
 CMD  ["/sbin/systemd"]
