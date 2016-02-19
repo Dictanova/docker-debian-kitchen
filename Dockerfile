@@ -25,7 +25,7 @@ RUN GEM_HOME="/tmp/verifier/gems" \
     GEM_PATH="/tmp/verifier/gems" \
     GEM_CACHE="/tmp/verifier/gems/cache" \
     /opt/chef/embedded/bin/gem install --no-rdoc --no-ri \
-    thor busser-serverspec serverspec serverspec_extensions bundler yarjuf
+    busser-serverspec serverspec bundler yarjuf
 
 RUN useradd kitchen && chown -R kitchen:kitchen /tmp/verifier
 
