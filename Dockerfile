@@ -7,7 +7,7 @@ RUN apt-get update \
  && apt-get clean
 
 # Install the Chef client
-RUN curl -L https://www.opscode.com/chef/install.sh | bash -s -- -v 12.5.1
+RUN curl -L https://www.opscode.com/chef/install.sh | bash -s -- -v 12.7.2
 
 # Prepare the gem cache used by Kitchen and Busser
 RUN GEM_HOME="/tmp/verifier/gems" \
