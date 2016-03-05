@@ -3,7 +3,7 @@ MAINTAINER Damien Raude-Morvan "drazzib@drazzib.com"
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
- && apt-get install -y curl sudo tar lsb-release \
+ && apt-get install -y curl sudo tar lsb-release net-tools netcat-traditional \
  && apt-get clean
 
 # Install the Chef client
