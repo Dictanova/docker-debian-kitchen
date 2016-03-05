@@ -2,7 +2,7 @@ FROM debian:wheezy
 MAINTAINER Damien Raude-Morvan "drazzib@drazzib.com"
 
 RUN apt-get update \
- && apt-get install -y curl sudo tar lsb-release \
+ && apt-get install -y curl sudo tar lsb-release net-tools netcat-traditional \
  && apt-get clean
 
 # Don't clean /tmp !
