@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:jessie-backports
 MAINTAINER Damien Raude-Morvan "drazzib@drazzib.com"
 
 ENV DEBIAN_FRONTEND noninteractive
