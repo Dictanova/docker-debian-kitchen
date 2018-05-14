@@ -2,7 +2,7 @@ FROM debian:stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
- && apt-get install -y curl sudo tar lsb-release net-tools netcat-traditional dbus locales \
+ && apt-get install -y curl sudo tar lsb-release net-tools netcat-traditional dbus locales systemd-sysv \
  && apt-get clean
 
 # Install the Chef client
