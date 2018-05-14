@@ -1,5 +1,4 @@
-FROM debian:jessie-backports
-MAINTAINER Damien Raude-Morvan "drazzib@drazzib.com"
+FROM debian:stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
