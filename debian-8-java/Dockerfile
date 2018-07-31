@@ -27,4 +27,5 @@ VOLUME ["/sys/fs/cgroup"]
 CMD  ["/sbin/systemd"]
 
 RUN apt-get update \
-    apt-get install --no-install-recommends -y -t jessie-backports openjdk-8-jdk
+ && apt-get install -y --no-install-recommends -t jessie-backports openjdk-8-jdk \
+ && apt-get clean
