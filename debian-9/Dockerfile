@@ -2,7 +2,11 @@ FROM debian:stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
- && apt-get install -y --no-install-recommends curl apt-transport-https dirmngr gnupg sudo tar lsb-release net-tools netcat-traditional dbus locales systemd-sysv \
+ && apt-get install -y --no-install-recommends sudo tar lsb-release \
+ net-tools netcat-traditional \
+ curl apt-transport-https ca-certificates dirmngr gnupg \
+ dbus locales \
+ systemd-sysv \
  && apt-get clean
 
 ENV container docker

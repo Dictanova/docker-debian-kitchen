@@ -2,7 +2,10 @@ FROM debian:jessie-backports
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
- && apt-get install -y --no-install-recommends curl apt-transport-https dirmngr gnupg sudo tar lsb-release net-tools netcat-traditional dbus locales \
+ && apt-get install -y --no-install-recommends sudo tar lsb-release \
+ net-tools netcat-traditional \
+ curl apt-transport-https ca-certificates dirmngr gnupg \
+ dbus locales \
  && apt-get clean
 
 ENV container docker
