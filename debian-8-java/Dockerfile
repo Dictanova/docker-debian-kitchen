@@ -5,11 +5,6 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends curl apt-transport-https dirmngr gnupg sudo tar lsb-release net-tools netcat-traditional dbus locales \
  && apt-get clean
 
-# https://docs.chef.io/chef_client_security.html#ssl-cert-file
-# https://github.com/nahi/httpclient/blob/v2.2.5/lib/httpclient/ssl_config.rb#L132
-ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
-ENV SSL_CERT_DIR /etc/ssl/certs
-
 ENV container docker
 RUN systemctl mask \
     systemd-remount-fs.service \
