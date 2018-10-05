@@ -2,7 +2,7 @@ FROM debian:stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
- && apt-get install -y --no-install-recommends curl apt-transport-https sudo tar lsb-release net-tools netcat-traditional dbus locales systemd-sysv \
+ && apt-get install -y --no-install-recommends curl apt-transport-https dirmngr gnupg sudo tar lsb-release net-tools netcat-traditional dbus locales systemd-sysv \
  && apt-get clean
 
 # https://docs.chef.io/chef_client_security.html#ssl-cert-file
